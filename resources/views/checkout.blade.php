@@ -12,12 +12,13 @@
                 <div class="modal-body p-0">
                     <div class="row align-items-stretch">
                         <div class="col-lg-6 p-lg-0"><a class="glightbox product-view d-block h-100 bg-cover bg-center"
-                                style="background: url(img/product-5.jpg)" href="{{ asset('assets/img/product-5.jpg') }}"
-                                data-gallery="gallery1" data-glightbox="Red digital smartwatch"></a><a
-                                class="glightbox d-none" href="{{ asset('assets/img/product-5-alt-1.jpg') }}"
-                                data-gallery="gallery1" data-glightbox="Red digital smartwatch"></a><a
-                                class="glightbox d-none" href="{{ asset('assets/img/product-5-alt-2.jpg') }}"
-                                data-gallery="gallery1" data-glightbox="Red digital smartwatch"></a></div>
+                                style="background: url({{ asset('assets/img/product-5.jpg') }})"
+                                href="{{ asset('assets/img/product-5.jpg') }}" data-gallery="gallery1"
+                                data-glightbox="Red digital smartwatch"></a><a class="glightbox d-none"
+                                href="{{ asset('assets/img/product-5-alt-1.jpg') }}" data-gallery="gallery1"
+                                data-glightbox="Red digital smartwatch"></a><a class="glightbox d-none"
+                                href="{{ asset('assets/img/product-5-alt-2.jpg') }}" data-gallery="gallery1"
+                                data-glightbox="Red digital smartwatch"></a></div>
                         <div class="col-lg-6">
                             <div class="p-4 my-md-4">
                                 <ul class="list-inline mb-2">
@@ -46,9 +47,9 @@
                                     </div>
                                     <div class="col-sm-5"><a
                                             class="btn btn-dark btn-sm w-100 h-100 d-flex align-items-center justify-content-center px-0"
-                                            href="{{ asset('assets/cart.html') }}">Add to cart</a></div>
-                                </div><a class="btn btn-link text-dark text-decoration-none p-0"
-                                    href="{{ asset('assets/i') }}" class="far#!fa-heart me-2"></i>Add to wish list</a>
+                                            href="cart">Add to cart</a></div>
+                                </div><a class="btn btn-link text-dark text-decoration-none p-0" href=""
+                                    class="far#!fa-heart me-2"></i>Add to wish list</a>
                             </div>
                         </div>
                     </div>
@@ -67,10 +68,8 @@
                     <div class="col-lg-6 text-lg-end">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-lg-end mb-0 px-0 bg-light">
-                                <li class="breadcrumb-item"><a class="text-dark"
-                                        href="{{ asset('assets/index.html') }}">Home</a></li>
-                                <li class="breadcrumb-item"><a class="text-dark"
-                                        href="{{ asset('assets/cart.html') }}">Cart</a></li>
+                                <li class="breadcrumb-item"><a class="text-dark" href="">Home</a></li>
+                                <li class="breadcrumb-item"><a class="text-dark" href="cart">Cart</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Checkout</li>
                             </ol>
                         </nav>

@@ -1,7 +1,7 @@
 @extends('app.app')
 
 @section('title', 'shop')
-delete file
+
 @section('section')
     <!--  Modal -->
     <div class="modal fade" id="productView" tabindex="-1">
@@ -12,11 +12,12 @@ delete file
                 <div class="modal-body p-0">
                     <div class="row align-items-stretch">
                         <div class="col-lg-6 p-lg-0"><a class="glightbox product-view d-block h-100 bg-cover bg-center"
-                                style="background: url(img/product-5.jpg)" href="img/product-5.jpg" data-gallery="gallery1"
+                                style="background: url({{ asset('assets/img/product-5.jpg') }})"
+                                href="{{ asset('assets/img/product-5.jpg') }}" data-gallery="gallery1"
                                 data-glightbox="Red digital smartwatch"></a><a class="glightbox d-none"
-                                href="img/product-5-alt-1.jpg" data-gallery="gallery1"
+                                href="{{ asset('assets/img/product-5-alt-1.jpg') }}" data-gallery="gallery1"
                                 data-glightbox="Red digital smartwatch"></a><a class="glightbox d-none"
-                                href="img/product-5-alt-2.jpg" data-gallery="gallery1"
+                                href="{{ asset('assetsimg/product-5-alt-2.jpg/') }}" data-gallery="gallery1"
                                 data-glightbox="Red digital smartwatch"></a></div>
                         <div class="col-lg-6">
                             <div class="p-4 my-md-4">
@@ -46,7 +47,7 @@ delete file
                                     </div>
                                     <div class="col-sm-5"><a
                                             class="btn btn-dark btn-sm w-100 h-100 d-flex align-items-center justify-content-center px-0"
-                                            href="cart.html">Add to cart</a></div>
+                                            href="cart">Add to cart</a></div>
                                 </div><a class="btn btn-link text-dark text-decoration-none p-0" href="#!"><i
                                         class="far fa-heart me-2"></i>Add to wish list</a>
                             </div>
@@ -67,7 +68,8 @@ delete file
                     <div class="col-lg-6 text-lg-end">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb justify-content-lg-end mb-0 px-0 bg-light">
-                                <li class="breadcrumb-item"><a class="text-dark" href="index.html">Home</a></li>
+                                <li class="breadcrumb-item"><a class="text-dark" href="{{ route('page.main') }}">Home</a>
+                                </li>
                                 <li class="breadcrumb-item active" aria-current="page">Shop</li>
                             </ol>
                         </nav>
@@ -193,22 +195,19 @@ delete file
                                 <div class="product text-center">
                                     <div class="mb-3 position-relative">
                                         <div class="badge text-white bg-"></div><a class="d-block"
-                                            href="detail.html"><img class="img-fluid w-100"
+                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
                                                 src="{{ asset('assets/img/product-1.jpg') }}" alt="..."></a>
                                         <div class="product-overlay">
                                             <ul class="mb-0 list-inline">
                                                 <li class="list-inline-item m-0 p-0"><a
                                                         class="btn btn-sm btn-outline-dark" href="#!"><i
                                                             class="far fa-heart"></i></a></li>
-                                                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="cart.html">Add to cart</a></li>
-                                                <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"
-                                                        href="#productView" data-bs-toggle="modal"><i
-                                                            class="fas fa-expand"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
-                                    <h6> <a class="reset-anchor" href="detail.html">Kui Ye Chen’s AirPods</a></h6>
+                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Kui Ye Chen’s
+                                            AirPods</a>
+                                    </h6>
                                     <p class="small text-muted">$250</p>
                                 </div>
                             </div>
@@ -217,7 +216,7 @@ delete file
                                 <div class="product text-center">
                                     <div class="mb-3 position-relative">
                                         <div class="badge text-white bg-"></div><a class="d-block"
-                                            href="detail.html"><img class="img-fluid w-100"
+                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
                                                 src="{{ asset('assets/img/product-2.jpg') }}" alt="..."></a>
                                         <div class="product-overlay">
                                             <ul class="mb-0 list-inline">
@@ -225,14 +224,16 @@ delete file
                                                         class="btn btn-sm btn-outline-dark" href="#!"><i
                                                             class="far fa-heart"></i></a></li>
                                                 <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="cart.html">Add to cart</a></li>
+                                                        href="{{ route('page.cart') }}">Add to cart</a></li>
                                                 <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"
                                                         href="#productView" data-bs-toggle="modal"><i
                                                             class="fas fa-expand"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
-                                    <h6> <a class="reset-anchor" href="detail.html">Air Jordan 12 gym red</a></h6>
+                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Air Jordan 12 gym
+                                            red</a>
+                                    </h6>
                                     <p class="small text-muted">$300</p>
                                 </div>
                             </div>
@@ -241,7 +242,7 @@ delete file
                                 <div class="product text-center">
                                     <div class="mb-3 position-relative">
                                         <div class="badge text-white bg-primary">New</div><a class="d-block"
-                                            href="detail.html"><img class="img-fluid w-100"
+                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
                                                 src="{{ asset('assets/img/product-3.jpg') }}" alt="..."></a>
                                         <div class="product-overlay">
                                             <ul class="mb-0 list-inline">
@@ -249,14 +250,16 @@ delete file
                                                         class="btn btn-sm btn-outline-dark" href="#!"><i
                                                             class="far fa-heart"></i></a></li>
                                                 <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="cart.html">Add to cart</a></li>
+                                                        href="{{ route('page.cart') }}">Add to cart</a></li>
                                                 <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"
                                                         href="#productView" data-bs-toggle="modal"><i
                                                             class="fas fa-expand"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
-                                    <h6> <a class="reset-anchor" href="detail.html">Cyan cotton t-shirt</a></h6>
+                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Cyan cotton
+                                            t-shirt</a>
+                                    </h6>
                                     <p class="small text-muted">$25</p>
                                 </div>
                             </div>
@@ -265,7 +268,7 @@ delete file
                                 <div class="product text-center">
                                     <div class="mb-3 position-relative">
                                         <div class="badge text-white bg-"></div><a class="d-block"
-                                            href="detail.html"><img class="img-fluid w-100"
+                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
                                                 src="{{ asset('assets/img/product-4.jpg') }}" alt="..."></a>
                                         <div class="product-overlay">
                                             <ul class="mb-0 list-inline">
@@ -273,14 +276,16 @@ delete file
                                                         class="btn btn-sm btn-outline-dark" href="#!"><i
                                                             class="far fa-heart"></i></a></li>
                                                 <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="cart.html">Add to cart</a></li>
+                                                        href="{{ route('page.cart') }}">Add to cart</a></li>
                                                 <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"
                                                         href="#productView" data-bs-toggle="modal"><i
                                                             class="fas fa-expand"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
-                                    <h6> <a class="reset-anchor" href="detail.html">Timex Unisex Originals</a></h6>
+                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Timex Unisex
+                                            Originals</a>
+                                    </h6>
                                     <p class="small text-muted">$351</p>
                                 </div>
                             </div>
@@ -289,7 +294,7 @@ delete file
                                 <div class="product text-center">
                                     <div class="mb-3 position-relative">
                                         <div class="badge text-white bg-info">Sale</div><a class="d-block"
-                                            href="detail.html"><img class="img-fluid w-100"
+                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
                                                 src="{{ asset('assets/img/product-5.jpg') }}" alt="..."></a>
                                         <div class="product-overlay">
                                             <ul class="mb-0 list-inline">
@@ -297,14 +302,16 @@ delete file
                                                         class="btn btn-sm btn-outline-dark" href="#!"><i
                                                             class="far fa-heart"></i></a></li>
                                                 <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="cart.html">Add to cart</a></li>
+                                                        href="{{ route('page.cart') }}">Add to cart</a></li>
                                                 <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"
                                                         href="#productView" data-bs-toggle="modal"><i
                                                             class="fas fa-expand"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
-                                    <h6> <a class="reset-anchor" href="detail.html">Red digital smartwatch</a></h6>
+                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Red digital
+                                            smartwatch</a>
+                                    </h6>
                                     <p class="small text-muted">$250</p>
                                 </div>
                             </div>
@@ -313,7 +320,7 @@ delete file
                                 <div class="product text-center">
                                     <div class="mb-3 position-relative">
                                         <div class="badge text-white bg-"></div><a class="d-block"
-                                            href="detail.html"><img class="img-fluid w-100"
+                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
                                                 src="{{ asset('assets/img/product-6.jpg') }}" alt="..."></a>
                                         <div class="product-overlay">
                                             <ul class="mb-0 list-inline">
@@ -321,14 +328,15 @@ delete file
                                                         class="btn btn-sm btn-outline-dark" href="#!"><i
                                                             class="far fa-heart"></i></a></li>
                                                 <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="cart.html">Add to cart</a></li>
+                                                        href="{{ route('page.cart') }}">Add to cart</a></li>
                                                 <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"
                                                         href="#productView" data-bs-toggle="modal"><i
                                                             class="fas fa-expand"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
-                                    <h6> <a class="reset-anchor" href="detail.html">Nike air max 95</a></h6>
+                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Nike air max 95</a>
+                                    </h6>
                                     <p class="small text-muted">$300</p>
                                 </div>
                             </div>
@@ -337,7 +345,7 @@ delete file
                                 <div class="product text-center">
                                     <div class="mb-3 position-relative">
                                         <div class="badge text-white bg-"></div><a class="d-block"
-                                            href="detail.html"><img class="img-fluid w-100"
+                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
                                                 src="{{ asset('assets/img/product-7.jpg') }}" alt="..."></a>
                                         <div class="product-overlay">
                                             <ul class="mb-0 list-inline">
@@ -345,14 +353,16 @@ delete file
                                                         class="btn btn-sm btn-outline-dark" href="#!"><i
                                                             class="far fa-heart"></i></a></li>
                                                 <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="cart.html">Add to cart</a></li>
+                                                        href="{{ route('page.cart') }}">Add to cart</a></li>
                                                 <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"
                                                         href="#productView" data-bs-toggle="modal"><i
                                                             class="fas fa-expand"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
-                                    <h6> <a class="reset-anchor" href="detail.html">Joemalone Women prefume</a></h6>
+                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Joemalone Women
+                                            prefume</a>
+                                    </h6>
                                     <p class="small text-muted">$25</p>
                                 </div>
                             </div>
@@ -361,7 +371,7 @@ delete file
                                 <div class="product text-center">
                                     <div class="mb-3 position-relative">
                                         <div class="badge text-white bg-"></div><a class="d-block"
-                                            href="detail.html"><img class="img-fluid w-100"
+                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
                                                 src="{{ asset('assets/img/product-8.jpg') }}" alt="..."></a>
                                         <div class="product-overlay">
                                             <ul class="mb-0 list-inline">
@@ -369,14 +379,14 @@ delete file
                                                         class="btn btn-sm btn-outline-dark" href="#!"><i
                                                             class="far fa-heart"></i></a></li>
                                                 <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="cart.html">Add to cart</a></li>
+                                                        href="{{ route('page.cart') }}">Add to cart</a></li>
                                                 <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"
                                                         href="#productView" data-bs-toggle="modal"><i
                                                             class="fas fa-expand"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
-                                    <h6> <a class="reset-anchor" href="detail.html">Apple Watch</a></h6>
+                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Apple Watch</a></h6>
                                     <p class="small text-muted">$351</p>
                                 </div>
                             </div>
@@ -385,7 +395,7 @@ delete file
                                 <div class="product text-center">
                                     <div class="mb-3 position-relative">
                                         <div class="badge text-white bg-danger">Sold</div><a class="d-block"
-                                            href="detail.html"><img class="img-fluid w-100"
+                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
                                                 src="{{ asset('assets/img/product-9.jpg') }}" alt="..."></a>
                                         <div class="product-overlay">
                                             <ul class="mb-0 list-inline">
@@ -393,14 +403,16 @@ delete file
                                                         class="btn btn-sm btn-outline-dark" href="#!"><i
                                                             class="far fa-heart"></i></a></li>
                                                 <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="cart.html">Add to cart</a></li>
+                                                        href="{{ route('page.cart') }}">Add to cart</a></li>
                                                 <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"
                                                         href="#productView" data-bs-toggle="modal"><i
                                                             class="fas fa-expand"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
-                                    <h6> <a class="reset-anchor" href="detail.html">Men silver Byron Watch</a></h6>
+                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Men silver Byron
+                                            Watch</a>
+                                    </h6>
                                     <p class="small text-muted">$351</p>
                                 </div>
                             </div>
@@ -409,7 +421,7 @@ delete file
                                 <div class="product text-center">
                                     <div class="mb-3 position-relative">
                                         <div class="badge text-white bg-primary">New</div><a class="d-block"
-                                            href="detail.html"><img class="img-fluid w-100"
+                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
                                                 src="{{ asset('assets/img/product-10.jpg') }}" alt="..."></a>
                                         <div class="product-overlay">
                                             <ul class="mb-0 list-inline">
@@ -417,14 +429,15 @@ delete file
                                                         class="btn btn-sm btn-outline-dark" href="#!"><i
                                                             class="far fa-heart"></i></a></li>
                                                 <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="cart.html">Add to cart</a></li>
+                                                        href="{{ route('page.cart') }}">Add to cart</a></li>
                                                 <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"
                                                         href="#productView" data-bs-toggle="modal"><i
                                                             class="fas fa-expand"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
-                                    <h6> <a class="reset-anchor" href="detail.html">Ploaroid one step camera</a></h6>
+                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Ploaroid one step
+                                            camera</a></h6>
                                     <p class="small text-muted">$351</p>
                                 </div>
                             </div>
@@ -433,7 +446,7 @@ delete file
                                 <div class="product text-center">
                                     <div class="mb-3 position-relative">
                                         <div class="badge text-white bg-"></div><a class="d-block"
-                                            href="detail.html"><img class="img-fluid w-100"
+                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
                                                 src="{{ asset('assets/img/product-11.jpg') }}" alt="..."></a>
                                         <div class="product-overlay">
                                             <ul class="mb-0 list-inline">
@@ -441,14 +454,16 @@ delete file
                                                         class="btn btn-sm btn-outline-dark" href="#!"><i
                                                             class="far fa-heart"></i></a></li>
                                                 <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="cart.html">Add to cart</a></li>
+                                                        href="{{ route('page.cart') }}">Add to cart</a></li>
                                                 <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"
                                                         href="#productView" data-bs-toggle="modal"><i
                                                             class="fas fa-expand"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
-                                    <h6> <a class="reset-anchor" href="detail.html">Gray Nike running shoes</a></h6>
+                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Gray Nike running
+                                            shoes</a>
+                                    </h6>
                                     <p class="small text-muted">$351</p>
                                 </div>
                             </div>
@@ -457,7 +472,7 @@ delete file
                                 <div class="product text-center">
                                     <div class="mb-3 position-relative">
                                         <div class="badge text-white bg-"></div><a class="d-block"
-                                            href="detail.html"><img class="img-fluid w-100"
+                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
                                                 src="{{ asset('assets/img/product-12.jpg') }}" alt="..."></a>
                                         <div class="product-overlay">
                                             <ul class="mb-0 list-inline">
@@ -465,14 +480,15 @@ delete file
                                                         class="btn btn-sm btn-outline-dark" href="#!"><i
                                                             class="far fa-heart"></i></a></li>
                                                 <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="cart.html">Add to cart</a></li>
+                                                        href="{{ route('page.cart') }}">Add to cart</a></li>
                                                 <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"
                                                         href="#productView" data-bs-toggle="modal"><i
                                                             class="fas fa-expand"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
-                                    <h6> <a class="reset-anchor" href="detail.html">Black DSLR lense</a></h6>
+                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Black DSLR lense</a>
+                                    </h6>
                                     <p class="small text-muted">$351</p>
                                 </div>
                             </div>

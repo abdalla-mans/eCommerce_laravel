@@ -12,11 +12,12 @@
                 <div class="modal-body p-0">
                     <div class="row align-items-stretch">
                         <div class="col-lg-6 p-lg-0"><a class="glightbox product-view d-block h-100 bg-cover bg-center"
-                                style="background: url(img/product-5.jpg)" href="img/product-5.jpg" data-gallery="gallery1"
+                                style="background: url({{ asset('assets/img/product-5.jpg') }})"
+                                href="{{ asset('assets/img/product-5.jpg') }}" data-gallery="gallery1"
                                 data-glightbox="Red digital smartwatch"></a><a class="glightbox d-none"
-                                href="img/product-5-alt-1.jpg" data-gallery="gallery1"
+                                href="{{ asset('assets/img/product-5-alt-1.jpg') }}" data-gallery="gallery1"
                                 data-glightbox="Red digital smartwatch"></a><a class="glightbox d-none"
-                                href="img/product-5-alt-2.jpg" data-gallery="gallery1"
+                                href="{{ asset('assets/img/product-5-alt-2.jpg') }}" data-gallery="gallery1"
                                 data-glightbox="Red digital smartwatch"></a></div>
                         <div class="col-lg-6">
                             <div class="p-4 my-md-4">
@@ -46,7 +47,7 @@
                                     </div>
                                     <div class="col-sm-5"><a
                                             class="btn btn-dark btn-sm w-100 h-100 d-flex align-items-center justify-content-center px-0"
-                                            href="cart.html">Add to cart</a></div>
+                                            href="{{ route('page.cart') }}">Add to cart</a></div>
                                 </div><a class="btn btn-link text-dark text-decoration-none p-0" href="#!"><i
                                         class="far fa-heart me-2"></i>Add to wish list</a>
                             </div>
@@ -135,7 +136,8 @@
                                     <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark"
                                             href="#!"><i class="far fa-heart"></i></a></li>
                                     <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                            href="cart.html">Add to cart</a></li>
+                                            href="cart.html">Add
+                                            to cart</a></li>
                                     <li class="list-inline-item me-0"><a class="btn btn-sm btn-outline-dark"
                                             href="#productView" data-bs-toggle="modal"><i class="fas fa-expand"></i></a>
                                     </li>

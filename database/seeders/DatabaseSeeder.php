@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,5 +19,14 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        for ($i = 0; $i < 10; $i++) {
+            DB::table('users')->insert([
+                'name' => 'abdalla mansour',
+                'email' => 'abdalla@gmail.com' . $i,
+                'password' => 'abdalla mansour 2001',
+                'remember_token' => $i == 3 ? true : false,
+            ]);
+        }
     }
 }

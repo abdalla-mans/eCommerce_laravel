@@ -36,7 +36,7 @@
         <header class="header bg-white">
             <div class="container px-lg-3">
                 <nav class="navbar navbar-expand-lg navbar-light py-3 px-lg-0"><a class="navbar-brand"
-                        href="{{ asset('assets/index.html') }}"><span
+                        href="{{ route('page.main') }}"><span
                             class="fw-bold text-uppercase text-dark">Boutique</span></a>
                     <button class="navbar-toggler navbar-toggler-end" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -45,40 +45,63 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item">
-                                <!-- Link--><a class="nav-link active" href="{{ asset('assets/index.html') }}">Home</a>
+                                <!-- Link-->
+                                <a class="nav-link active" href="{{ route('page.main') }}">Home</a>
                             </li>
                             <li class="nav-item">
-                                <!-- Link--><a class="nav-link" href="{{ asset('assets/shop.html') }}">Shop</a>
+                                <!-- Link-->
+                                <a class="nav-link" href="{{ route('page.shop') }}">Shop</a>
                             </li>
                             <li class="nav-item">
-                                <!-- Link--><a class="nav-link"
-                                    href="{{ asset('assets/detail.html">Product ') }}">detail</a>
+                                <!-- Link-->
+                                <a class="nav-link" href="{{ route('page.detail') }}">Product detail</a>
                             </li>
                             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="pagesDropdown"
-                                    href="{{ asset('assets/') }}" data-bs-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">Pages</a>
-                                <div class="dropdown-menu mt-3 shadow-sm" aria-labelledby="pagesDropdown"><a
-                                        class="dropdown-item border-0 transition-link"
-                                        href="{{ asset('assets/index.html') }}">Homepage</a><a
-                                        class="dropdown-item border-0 transition-link"
-                                        href="{{ asset('assets/shop.html') }}">Category</a><a
-                                        class="dropdown-item border-0 transition-link"
-                                        href="{{ asset('assets/detail.html') }}">Product detail</a><a
-                                        class="dropdown-item border-0 transition-link"
-                                        href="{{ asset('assets/cart.html') }}">Shopping cart</a><a
-                                        class="dropdown-item border-0 transition-link"
-                                        href="{{ asset('assets/checkout.html') }}">Checkout</a></div>
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+                                <div class="dropdown-menu mt-3 shadow-sm" aria-labelledby="pagesDropdown">
+                                    <a class="dropdown-item border-0 transition-link"
+                                        href="{{ route('page.main') }}">Homepage</a>
+                                    <a class="dropdown-item border-0 transition-link"
+                                        href="{{ route('page.shop') }}">Category</a>
+                                    <a class="dropdown-item border-0 transition-link"
+                                        href="{{ route('page.detail') }}">Product detail</a>
+                                    <a class="dropdown-item border-0 transition-link"
+                                        href="{{ route('page.cart') }}">Shopping cart</a>
+                                    <a class="dropdown-item border-0 transition-link"
+                                        href="{{ route('page.checkout') }}">Checkout</a>
+                                </div>
                             </li>
                         </ul>
                         <ul class="navbar-nav ms-auto">
-                            <li class="nav-item"><a class="nav-link" href="{{ asset('assets/cart.html') }}"> <i
-                                        class="fas fa-dolly-flatbed me-1 text-gray"></i>Cart<small
-                                        class="text-gray fw-normal">(2)</small></a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ asset('assets/') }}"> <i
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('page.cart') }}">
+                                    <i class="fas fa-dolly-flatbed me-1 text-gray"> </i>Cart
+                                    <small class="text-gray fw-normal">(2)</small>
+                                </a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href=""> <i
                                         class="far fa-heart me-1"></i><small class="text-gray fw-normal">
                                         (0)</small></a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ asset('assets/') }}"> <i
-                                        class="fas fa-user me-1 text-gray fw-normal"></i>Login</a></li>
+
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('page.logout') }}">
+                                    <i class="fas fa-user me-1 text-gray fw-normal"></i>log-out
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('page.login') }}">
+                                    <i class="fas fa-user me-1 text-gray fw-normal"></i>Login
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('page.register') }}">
+                                    <i class="fas fa-user me-1 text-gray fw-normal"></i>Register
+                                </a>
+                            </li>
+
                         </ul>
                     </div>
                 </nav>

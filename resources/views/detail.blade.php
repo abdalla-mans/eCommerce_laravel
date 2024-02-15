@@ -12,11 +12,11 @@
                 <div class="modal-body p-0">
                     <div class="row align-items-stretch">
                         <div class="col-lg-6 p-lg-0"><a class="glightbox product-view d-block h-100 bg-cover bg-center"
-                                style="background: url(img/product-5.jpg)" href="img/product-5.jpg" data-gallery="gallery1"
+                                style="background: url({{ asset('assets/img/product-5.jpg') }})" href="{{ asset('assets/img/product-5.jpg') }}" data-gallery="gallery1"
                                 data-glightbox="Red digital smartwatch"></a><a class="glightbox d-none"
-                                href="img/product-5-alt-1.jpg" data-gallery="gallery1"
+                                href="{{ asset('assets/img/product-5-alt-1.jpg') }}" data-gallery="gallery1"
                                 data-glightbox="Red digital smartwatch"></a><a class="glightbox d-none"
-                                href="img/product-5-alt-2.jpg" data-gallery="gallery1"
+                                href="{{ asset('assetsimg/product-5-alt-2.jpg/') }}" data-gallery="gallery1"
                                 data-glightbox="Red digital smartwatch"></a></div>
                         <div class="col-lg-6">
                             <div class="p-4 my-md-4">
@@ -46,7 +46,7 @@
                                     </div>
                                     <div class="col-sm-5"><a
                                             class="btn btn-dark btn-sm w-100 h-100 d-flex align-items-center justify-content-center px-0"
-                                            href="cart.html">Add to cart</a></div>
+                                            href="cart">Add to cart</a></div>
                                 </div><a class="btn btn-link text-dark text-decoration-none p-0" href="#!"><i
                                         class="far fa-heart me-2"></i>Add to wish list</a>
                             </div>
@@ -80,22 +80,22 @@
                             <div class="swiper product-slider">
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide h-auto"><a class="glightbox product-view"
-                                            href="img/product-detail-1.jpg" data-gallery="gallery2"
+                                            href="{{ asset('assets/img/product-detail-1.jpg') }}" data-gallery="gallery2"
                                             data-glightbox="Product item 1"><img class="img-fluid"
                                                 src="{{ asset('assets/img/product-detail-1.jpg') }}" alt="..."></a>
                                     </div>
                                     <div class="swiper-slide h-auto"><a class="glightbox product-view"
-                                            href="img/product-detail-2.jpg" data-gallery="gallery2"
+                                            href="{{ asset('assets/img/product-detail-2.jpg') }}" data-gallery="gallery2"
                                             data-glightbox="Product item 2"><img class="img-fluid"
                                                 src="{{ asset('assets/img/product-detail-2.jpg') }}" alt="..."></a>
                                     </div>
                                     <div class="swiper-slide h-auto"><a class="glightbox product-view"
-                                            href="img/product-detail-3.jpg" data-gallery="gallery2"
+                                            href="{{ asset('assets/img/product-detail-3.jpg') }}" data-gallery="gallery2"
                                             data-glightbox="Product item 3"><img class="img-fluid"
                                                 src="{{ asset('assets/img/product-detail-3.jpg') }}" alt="..."></a>
                                     </div>
                                     <div class="swiper-slide h-auto"><a class="glightbox product-view"
-                                            href="img/product-detail-4.jpg" data-gallery="gallery2"
+                                            href="{{ asset('assets/img/product-detail-4.jpg') }}" data-gallery="gallery2"
                                             data-glightbox="Product item 4"><img class="img-fluid"
                                                 src="{{ asset('assets/img/product-detail-4.jpg') }}" alt="..."></a>
                                     </div>
