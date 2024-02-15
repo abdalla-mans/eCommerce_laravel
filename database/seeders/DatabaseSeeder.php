@@ -20,13 +20,14 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        for ($i = 0; $i < 10; $i++) {
-            DB::table('users')->insert([
-                'name' => 'abdalla mansour',
-                'email' => 'abdalla@gmail.com' . $i,
-                'password' => 'abdalla mansour 2001',
-                'remember_token' => $i == 3 ? true : false,
-            ]);
-        }
+        /**
+         * seed data in
+         *  - categories
+         *  - products
+         *  - users
+         */
+        $this->call(CategorySeeder::class);
+        $this->call(ProductSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }
