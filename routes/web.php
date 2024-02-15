@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ViewPageController;
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,14 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// page routes
-Route::view('/', 'index')->name('page.main');
-Route::view('/detail', 'detail')->name('page.detail');
-Route::view('/checkout', 'checkout')->name('page.checkout');
-Route::view('/cart', 'cart')->name('page.cart');
-Route::view('/shop', 'shop')->name('page.shop');
+Route::controller(PageController::class)->prefix('/')->group(function () {
+    // page routes
+    Route::get('/', 'main')->name('page.main');
+    Route::get('/details/{id}', 'detail')->name('page.detail');
+    Route::get('/checkout', 'checkout')->name('page.checkout');
+    Route::get('/cart', 'cart')->name('page.cart');
+    Route::get('/shop', 'shop')->name('page.shop');
 
-// logs routes
-Route::view('/login', 'logs.login')->name('page.login');
-Route::view('/logout', 'logs.logout')->name('page.logout');
-Route::view('/register', 'logs.register')->name('page.register');
+    // logs routes
+    Route::get('/login', 'login')->name('page.login');
+    Route::get('/logout', 'logout')->name('page.logout');
+    Route::get('/register', 'register')->name('page.register');
+});
