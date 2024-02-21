@@ -125,7 +125,7 @@
                     <ul class="list-unstyled small d-inline-block">
                         <li class="px-3 py-2 mb-1 bg-white text-muted"><strong
                                 class="text-uppercase text-dark">Category:</strong><a class="reset-anchor ms-2"
-                                href="#!">Demo Products</a></li>
+                                href="{{ url('/shop?sort_category=' . $category->id) }}">{{ $category->name }}</a></li>
                     </ul>
                 </div>
             </div>

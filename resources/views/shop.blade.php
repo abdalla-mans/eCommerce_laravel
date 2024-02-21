@@ -83,37 +83,34 @@
                     <!-- SHOP SIDEBAR-->
                     <div class="col-lg-3 order-2 order-lg-1">
                         <h5 class="text-uppercase mb-4">Categories</h5>
-                        <div class="py-2 px-4 bg-dark text-white mb-3"><strong class="small text-uppercase fw-bold">Fashion
-                                &amp; Acc</strong></div>
-                        <ul class="list-unstyled small text-muted ps-lg-4 font-weight-normal">
-                            <li class="mb-2"><a class="reset-anchor" href="#!">Women's T-Shirts</a></li>
-                            <li class="mb-2"><a class="reset-anchor" href="#!">Men's T-Shirts</a></li>
-                            <li class="mb-2"><a class="reset-anchor" href="#!">Dresses</a></li>
-                            <li class="mb-2"><a class="reset-anchor" href="#!">Novelty socks</a></li>
-                            <li class="mb-2"><a class="reset-anchor" href="#!">Women's sunglasses</a></li>
-                            <li class="mb-2"><a class="reset-anchor" href="#!">Men's sunglasses</a></li>
-                        </ul>
-                        <div class="py-2 px-4 bg-light mb-3"><strong class="small text-uppercase fw-bold">Health &amp;
-                                Beauty</strong></div>
-                        <ul class="list-unstyled small text-muted ps-lg-4 font-weight-normal">
-                            <li class="mb-2"><a class="reset-anchor" href="#!">Shavers</a></li>
-                            <li class="mb-2"><a class="reset-anchor" href="#!">bags</a></li>
-                            <li class="mb-2"><a class="reset-anchor" href="#!">Cosmetic</a></li>
-                            <li class="mb-2"><a class="reset-anchor" href="#!">Nail Art</a></li>
-                            <li class="mb-2"><a class="reset-anchor" href="#!">Skin Masks &amp; Peels</a></li>
-                            <li class="mb-2"><a class="reset-anchor" href="#!">Korean cosmetics</a></li>
-                        </ul>
-                        <div class="py-2 px-4 bg-light mb-3"><strong
-                                class="small text-uppercase fw-bold">Electronics</strong></div>
-                        <ul class="list-unstyled small text-muted ps-lg-4 font-weight-normal mb-5">
-                            <li class="mb-2"><a class="reset-anchor" href="#!">Electronics</a></li>
-                            <li class="mb-2"><a class="reset-anchor" href="#!">USB Flash drives</a></li>
-                            <li class="mb-2"><a class="reset-anchor" href="#!">Headphones</a></li>
-                            <li class="mb-2"><a class="reset-anchor" href="#!">Portable speakers</a></li>
-                            <li class="mb-2"><a class="reset-anchor" href="#!">Cell Phone bluetooth headsets</a>
-                            </li>
-                            <li class="mb-2"><a class="reset-anchor" href="#!">Keyboards</a></li>
-                        </ul>
+                        <h5>
+                            <a href="{{ url('/shop') }}">All Categories</a>
+                        </h5><br>
+                        <div class="accordion" id="accordionExample">
+                            @foreach ($main_categories as $main)
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#my_{{ $main->id }}" aria-expanded="true"
+                                            aria-controls="my_{{ $main->id }}">
+                                            {{ $main->name }}
+                                        </button>
+                                    </h2>
+                                    @foreach ($categories as $category)
+                                        <div id="my_{{ $main->id }}" class="accordion-collapse collapse"
+                                            data-bs-parent="#accordionExample">
+                                            @if ($category->category_id == $main->id)
+                                                <div class="accordion-body">
+                                                    <a style="{{ isset($category_id) ? ($category->id == $category_id ? 'color:black' : '') : '' }}"
+                                                        href="{{ url('/shop?sort_category=' . $category->id) }}">{{ $category->name }}</a>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endforeach
+                        </div>
+                        <br>
                         <h6 class="text-uppercase mb-4">Price range</h6>
                         <div class="price-range pt-4 mb-5">
                             <div id="range"></div>
@@ -191,323 +188,91 @@
                         </div>
                         <div class="row">
                             <!-- PRODUCT-->
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product text-center">
-                                    <div class="mb-3 position-relative">
-                                        <div class="badge text-white bg-"></div><a class="d-block"
-                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
-                                                src="{{ asset('assets/img/product-1.jpg') }}" alt="..."></a>
-                                        <div class="product-overlay">
-                                            <ul class="mb-0 list-inline">
-                                                <li class="list-inline-item m-0 p-0"><a
-                                                        class="btn btn-sm btn-outline-dark" href="#!"><i
-                                                            class="far fa-heart"></i></a></li>
-                                            </ul>
+                            @foreach ($products as $product)
+                                @php
+                                    $img = explode('|', $product->image);
+                                @endphp
+                                <div class="col-lg-4 col-sm-6">
+                                    <div class="product text-center">
+                                        <div class="mb-3 position-relative">
+                                            <div class="badge text-white bg-"></div><a class="d-block"
+                                                href="{{ route('page.detail', $product->id) }}"><img
+                                                    class="img-fluid w-100" src="{{ asset('assets/img/' . $img[0]) }}"
+                                                    alt="..."></a>
+                                            <div class="product-overlay">
+                                                <ul class="mb-0 list-inline">
+                                                    <li class="list-inline-item m-0 p-0"><a
+                                                            class="btn btn-sm btn-outline-dark" href="#!"><i
+                                                                class="far fa-heart"></i></a></li>
+                                                    <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
+                                                            href="{{ route('page.cart') }}">Add to cart</a></li>
+                                                    <li class="list-inline-item mr-0"><a
+                                                            class="btn btn-sm btn-outline-dark" href="#productView"
+                                                            data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
+                                                </ul>
+                                            </div>
                                         </div>
+                                        <h6> <a class="reset-anchor"
+                                                href="{{ route('page.detail', $product->id) }}">{{ $product->title }}</a>
+                                        </h6>
+                                        <p class="small text-muted">${{ $product->salary }}</p>
                                     </div>
-                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Kui Ye Chen’s
-                                            AirPods</a>
-                                    </h6>
-                                    <p class="small text-muted">$250</p>
                                 </div>
-                            </div>
-                            <!-- PRODUCT-->
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product text-center">
-                                    <div class="mb-3 position-relative">
-                                        <div class="badge text-white bg-"></div><a class="d-block"
-                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
-                                                src="{{ asset('assets/img/product-2.jpg') }}" alt="..."></a>
-                                        <div class="product-overlay">
-                                            <ul class="mb-0 list-inline">
-                                                <li class="list-inline-item m-0 p-0"><a
-                                                        class="btn btn-sm btn-outline-dark" href="#!"><i
-                                                            class="far fa-heart"></i></a></li>
-                                                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="{{ route('page.cart') }}">Add to cart</a></li>
-                                                <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"
-                                                        href="#productView" data-bs-toggle="modal"><i
-                                                            class="fas fa-expand"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Air Jordan 12 gym
-                                            red</a>
-                                    </h6>
-                                    <p class="small text-muted">$300</p>
-                                </div>
-                            </div>
-                            <!-- PRODUCT-->
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product text-center">
-                                    <div class="mb-3 position-relative">
-                                        <div class="badge text-white bg-primary">New</div><a class="d-block"
-                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
-                                                src="{{ asset('assets/img/product-3.jpg') }}" alt="..."></a>
-                                        <div class="product-overlay">
-                                            <ul class="mb-0 list-inline">
-                                                <li class="list-inline-item m-0 p-0"><a
-                                                        class="btn btn-sm btn-outline-dark" href="#!"><i
-                                                            class="far fa-heart"></i></a></li>
-                                                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="{{ route('page.cart') }}">Add to cart</a></li>
-                                                <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"
-                                                        href="#productView" data-bs-toggle="modal"><i
-                                                            class="fas fa-expand"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Cyan cotton
-                                            t-shirt</a>
-                                    </h6>
-                                    <p class="small text-muted">$25</p>
-                                </div>
-                            </div>
-                            <!-- PRODUCT-->
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product text-center">
-                                    <div class="mb-3 position-relative">
-                                        <div class="badge text-white bg-"></div><a class="d-block"
-                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
-                                                src="{{ asset('assets/img/product-4.jpg') }}" alt="..."></a>
-                                        <div class="product-overlay">
-                                            <ul class="mb-0 list-inline">
-                                                <li class="list-inline-item m-0 p-0"><a
-                                                        class="btn btn-sm btn-outline-dark" href="#!"><i
-                                                            class="far fa-heart"></i></a></li>
-                                                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="{{ route('page.cart') }}">Add to cart</a></li>
-                                                <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"
-                                                        href="#productView" data-bs-toggle="modal"><i
-                                                            class="fas fa-expand"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Timex Unisex
-                                            Originals</a>
-                                    </h6>
-                                    <p class="small text-muted">$351</p>
-                                </div>
-                            </div>
-                            <!-- PRODUCT-->
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product text-center">
-                                    <div class="mb-3 position-relative">
-                                        <div class="badge text-white bg-info">Sale</div><a class="d-block"
-                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
-                                                src="{{ asset('assets/img/product-5.jpg') }}" alt="..."></a>
-                                        <div class="product-overlay">
-                                            <ul class="mb-0 list-inline">
-                                                <li class="list-inline-item m-0 p-0"><a
-                                                        class="btn btn-sm btn-outline-dark" href="#!"><i
-                                                            class="far fa-heart"></i></a></li>
-                                                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="{{ route('page.cart') }}">Add to cart</a></li>
-                                                <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"
-                                                        href="#productView" data-bs-toggle="modal"><i
-                                                            class="fas fa-expand"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Red digital
-                                            smartwatch</a>
-                                    </h6>
-                                    <p class="small text-muted">$250</p>
-                                </div>
-                            </div>
-                            <!-- PRODUCT-->
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product text-center">
-                                    <div class="mb-3 position-relative">
-                                        <div class="badge text-white bg-"></div><a class="d-block"
-                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
-                                                src="{{ asset('assets/img/product-6.jpg') }}" alt="..."></a>
-                                        <div class="product-overlay">
-                                            <ul class="mb-0 list-inline">
-                                                <li class="list-inline-item m-0 p-0"><a
-                                                        class="btn btn-sm btn-outline-dark" href="#!"><i
-                                                            class="far fa-heart"></i></a></li>
-                                                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="{{ route('page.cart') }}">Add to cart</a></li>
-                                                <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"
-                                                        href="#productView" data-bs-toggle="modal"><i
-                                                            class="fas fa-expand"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Nike air max 95</a>
-                                    </h6>
-                                    <p class="small text-muted">$300</p>
-                                </div>
-                            </div>
-                            <!-- PRODUCT-->
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product text-center">
-                                    <div class="mb-3 position-relative">
-                                        <div class="badge text-white bg-"></div><a class="d-block"
-                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
-                                                src="{{ asset('assets/img/product-7.jpg') }}" alt="..."></a>
-                                        <div class="product-overlay">
-                                            <ul class="mb-0 list-inline">
-                                                <li class="list-inline-item m-0 p-0"><a
-                                                        class="btn btn-sm btn-outline-dark" href="#!"><i
-                                                            class="far fa-heart"></i></a></li>
-                                                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="{{ route('page.cart') }}">Add to cart</a></li>
-                                                <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"
-                                                        href="#productView" data-bs-toggle="modal"><i
-                                                            class="fas fa-expand"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Joemalone Women
-                                            prefume</a>
-                                    </h6>
-                                    <p class="small text-muted">$25</p>
-                                </div>
-                            </div>
-                            <!-- PRODUCT-->
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product text-center">
-                                    <div class="mb-3 position-relative">
-                                        <div class="badge text-white bg-"></div><a class="d-block"
-                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
-                                                src="{{ asset('assets/img/product-8.jpg') }}" alt="..."></a>
-                                        <div class="product-overlay">
-                                            <ul class="mb-0 list-inline">
-                                                <li class="list-inline-item m-0 p-0"><a
-                                                        class="btn btn-sm btn-outline-dark" href="#!"><i
-                                                            class="far fa-heart"></i></a></li>
-                                                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="{{ route('page.cart') }}">Add to cart</a></li>
-                                                <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"
-                                                        href="#productView" data-bs-toggle="modal"><i
-                                                            class="fas fa-expand"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Apple Watch</a></h6>
-                                    <p class="small text-muted">$351</p>
-                                </div>
-                            </div>
-                            <!-- PRODUCT-->
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product text-center">
-                                    <div class="mb-3 position-relative">
-                                        <div class="badge text-white bg-danger">Sold</div><a class="d-block"
-                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
-                                                src="{{ asset('assets/img/product-9.jpg') }}" alt="..."></a>
-                                        <div class="product-overlay">
-                                            <ul class="mb-0 list-inline">
-                                                <li class="list-inline-item m-0 p-0"><a
-                                                        class="btn btn-sm btn-outline-dark" href="#!"><i
-                                                            class="far fa-heart"></i></a></li>
-                                                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="{{ route('page.cart') }}">Add to cart</a></li>
-                                                <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"
-                                                        href="#productView" data-bs-toggle="modal"><i
-                                                            class="fas fa-expand"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Men silver Byron
-                                            Watch</a>
-                                    </h6>
-                                    <p class="small text-muted">$351</p>
-                                </div>
-                            </div>
-                            <!-- PRODUCT-->
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product text-center">
-                                    <div class="mb-3 position-relative">
-                                        <div class="badge text-white bg-primary">New</div><a class="d-block"
-                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
-                                                src="{{ asset('assets/img/product-10.jpg') }}" alt="..."></a>
-                                        <div class="product-overlay">
-                                            <ul class="mb-0 list-inline">
-                                                <li class="list-inline-item m-0 p-0"><a
-                                                        class="btn btn-sm btn-outline-dark" href="#!"><i
-                                                            class="far fa-heart"></i></a></li>
-                                                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="{{ route('page.cart') }}">Add to cart</a></li>
-                                                <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"
-                                                        href="#productView" data-bs-toggle="modal"><i
-                                                            class="fas fa-expand"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Ploaroid one step
-                                            camera</a></h6>
-                                    <p class="small text-muted">$351</p>
-                                </div>
-                            </div>
-                            <!-- PRODUCT-->
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product text-center">
-                                    <div class="mb-3 position-relative">
-                                        <div class="badge text-white bg-"></div><a class="d-block"
-                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
-                                                src="{{ asset('assets/img/product-11.jpg') }}" alt="..."></a>
-                                        <div class="product-overlay">
-                                            <ul class="mb-0 list-inline">
-                                                <li class="list-inline-item m-0 p-0"><a
-                                                        class="btn btn-sm btn-outline-dark" href="#!"><i
-                                                            class="far fa-heart"></i></a></li>
-                                                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="{{ route('page.cart') }}">Add to cart</a></li>
-                                                <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"
-                                                        href="#productView" data-bs-toggle="modal"><i
-                                                            class="fas fa-expand"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Gray Nike running
-                                            shoes</a>
-                                    </h6>
-                                    <p class="small text-muted">$351</p>
-                                </div>
-                            </div>
-                            <!-- PRODUCT-->
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product text-center">
-                                    <div class="mb-3 position-relative">
-                                        <div class="badge text-white bg-"></div><a class="d-block"
-                                            href="{{ route('page.detail') }}"><img class="img-fluid w-100"
-                                                src="{{ asset('assets/img/product-12.jpg') }}" alt="..."></a>
-                                        <div class="product-overlay">
-                                            <ul class="mb-0 list-inline">
-                                                <li class="list-inline-item m-0 p-0"><a
-                                                        class="btn btn-sm btn-outline-dark" href="#!"><i
-                                                            class="far fa-heart"></i></a></li>
-                                                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-                                                        href="{{ route('page.cart') }}">Add to cart</a></li>
-                                                <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark"
-                                                        href="#productView" data-bs-toggle="modal"><i
-                                                            class="fas fa-expand"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <h6> <a class="reset-anchor" href="{{ route('page.detail') }}">Black DSLR lense</a>
-                                    </h6>
-                                    <p class="small text-muted">$351</p>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
-                        <!-- PAGINATION-->
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-center justify-content-lg-end">
-                                <li class="page-item mx-1"><a class="page-link" href="#!"
-                                        aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                                <li class="page-item mx-1 active"><a class="page-link" href="#!">1</a></li>
-                                <li class="page-item mx-1"><a class="page-link" href="#!">2</a></li>
-                                <li class="page-item mx-1"><a class="page-link" href="#!">3</a></li>
-                                <li class="page-item ms-1"><a class="page-link" href="#!" aria-label="Next"><span
-                                            aria-hidden="true">»</span></a></li>
-                            </ul>
-                        </nav>
+                        <div class="btn-group" style="max-width: 400px;">
+                            {{-- اذا كان رقم الصفحه لا يساوي 0 اذا انت بحاجه الي وضع اسهم للتنقل --}}
+                            @if ($page_number != 0)
+                                {{-- السهمين المزدوجين للرجوع الي النقطه الاولي --}}
+                                <a href="?page_number=0&sort_category={{ $category_id ?? '' }}"
+                                    class="btn btn-outline-secondary">&lt;&lt;</a>
+                                {{-- السهم المفرد للرجوع خطوه واحده فقت --}}
+                                <a href="?page_number={{ $page_number - 1 }}&sort_category={{ $category_id ?? '' }}"
+                                    class="btn btn-outline-secondary">&lt;</a>
+                            @endif
+                            @php
+                                /**
+                                 * you have
+                                 * - @var $page_number by default = 0
+                                 * - @var $count the count products from database
+                                 */
+                                $button_numbers = floor($count / 12);
+
+                                /**
+                                 * get the number of remaining numbers,
+                                 * maximum 5 numbers
+                                 *
+                                 * @var $num
+                                 */
+                                $num = 0;
+                                for ($i = 0; $i < 5; $i++) {
+                                    if ($page_number + $i > $button_numbers) {
+                                        break;
+                                    } else {
+                                        $num++;
+                                    }
+                                }
+                            @endphp
+                            @if ($page_number != 0)
+                                <a href="?page_number={{ $page_number - 1 }}&sort_category={{ $category_id ?? '' }}"
+                                    class="btn btn-outline-secondary">{!! $page_number !!}</a>
+                            @endif
+                            @for ($i = $page_number; $i < $page_number + $num; $i++)
+                                <a href="?page_number={{ $i }}&sort_category={{ $category_id ?? '' }}"
+                                    class="btn btn-outline-secondary {!! $i == $page_number ? 'active' : '' !!}">{!! $i + 1 !!}</a>
+                            @endfor
+                            {{-- اذا لم تكن قد وصلت لنهايه الصفحات اذا انت بحاجه الي وضع اسهم للتنقل --}}
+                            @if ($page_number != $button_numbers)
+                                {{-- انتقل خطوه واحده --}}
+                                <a href="?page_number={{ $page_number + 1 }}&sort_category={{ $category_id ?? '' }}"
+                                    type="button" class="btn btn-outline-secondary">></a>
+                                {{-- انتقل خطوتان --}}
+                                <a href="?page_number={{ $button_numbers }}&sort_category={{ $category_id ?? '' }}"
+                                    type="button" class="btn btn-outline-secondary">>></a>
+                            @endif
+                        </div>
                     </div>
                 </div>
-            </div>
         </section>
     </div>
 @endsection

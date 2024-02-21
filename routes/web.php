@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\LogsPagesController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ShopPagesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,8 +22,11 @@ Route::controller(PageController::class)->prefix('/')->group(function () {
     Route::get('/details/{id}', 'detail')->name('page.detail');
     Route::get('/checkout', 'checkout')->name('page.checkout');
     Route::get('/cart', 'cart')->name('page.cart');
-    Route::get('/shop', 'shop')->name('page.shop');
+});
 
+Route::get('/shop', ShopPagesController::class)->name('page.shop');
+
+Route::controller(LogsPagesController::class)->prefix('/logs')->group(function () {
     // logs routes
     Route::get('/login', 'login')->name('page.login');
     Route::get('/logout', 'logout')->name('page.logout');

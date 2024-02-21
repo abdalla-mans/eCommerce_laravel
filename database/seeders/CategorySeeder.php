@@ -13,8 +13,13 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('categories')->insert([
-            'name' => 'first category',
-        ]);
+
+        $arr = ['phones', 'laptops', 'watches', 'shoes', 'electronics', 'clothes'];
+
+        foreach ($arr as $val) {
+            DB::table('categories')->insert([
+                'name' => $val,
+            ]);
+        }
     }
 }
