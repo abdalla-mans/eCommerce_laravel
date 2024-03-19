@@ -3,24 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class PageController extends Controller
 {
-    function main()
-    {
-        $products = DB::table('products')->limit(8)->inRandomOrder()->get();
-        return view('index', compact('products'));
-    }
 
-    function detail(string $id, Request $r)
+    public function detail(string $id, Request $r)
     {
         $product = Product::where('id', $id)->first();
 
         if ($product != null) {
 
-            $category = DB::table('categories')->where('id', $product->category_id)->first();
+            $category = Category::where('id', $product->category_id)->first();
 
             return view('detail', compact('product', 'category'));
         } else {
@@ -28,13 +23,34 @@ class PageController extends Controller
         }
     }
 
-    function checkout()
-    {
-        return view('checkout');
-    }
+    public function shop (Request $request) {
 
-    function cart()
-    {
-        return view('cart');
+        dd(route('login'));
+
+        if ($request->has('sort_category')) {
+
+            // get category id
+            $category_id = $request->sort_category;
+            
+            $products = Product::where('category_id', $category_id)->paginate();
+
+            // chick category if exist
+            if ($products->count() > 0) {
+
+                $categories = Category::all();
+                return view('shop', compact('products', 'categories'));
+
+            } else {
+                return back();
+            }
+
+        } else {
+
+            $products = Product::paginate();
+            $categories = Category::all();
+    
+            return view('shop', compact('products', 'categories'));
+        }
+
     }
 }

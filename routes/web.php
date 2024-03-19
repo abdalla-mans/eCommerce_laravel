@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\LogsPagesController;
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\ShopPagesController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,19 +15,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::controller(PageController::class)->prefix('/')->group(function () {
-    // page routes
-    Route::get('/', 'main')->name('page.main');
-    Route::get('/details/{id}', 'detail')->name('page.detail');
-    Route::get('/checkout', 'checkout')->name('page.checkout');
-    Route::get('/cart', 'cart')->name('page.cart');
+Route::get('/', function () {
+    $products = Product::limit(8)->inRandomOrder()->get();
+    return view('index', compact('products'));
+})->name('page.main');
+
+
+// !!!!!!!!!!!
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/dashboard_admin', function () {
+    return view('dashboard.index');
+})->middleware(['auth', 'admin', 'verified'])->name('dashboard');
+
+Route::middleware('auth', 'admin')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/shop', ShopPagesController::class)->name('page.shop');
-
-Route::controller(LogsPagesController::class)->prefix('/logs')->group(function () {
-    // logs routes
-    Route::get('/login', 'login')->name('page.login');
-    Route::get('/logout', 'logout')->name('page.logout');
-    Route::get('/register', 'register')->name('page.register');
-});
+require __DIR__ . '/old_web.php';
+require __DIR__ . '/auth.php';

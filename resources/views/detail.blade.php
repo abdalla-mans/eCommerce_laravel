@@ -66,12 +66,9 @@
                         <div class="col-sm-2 p-sm-0 order-2 order-sm-1 mt-2 mt-sm-0 px-xl-2">
                             <div class="swiper product-slider-thumbs">
                                 <div class="swiper-wrapper">
-                                    @php
-                                        $images = explode('|', $product->image);
-                                    @endphp
-                                    @foreach ($images as $img)
+                                    @foreach ($product->images as $img)
                                         <div class="swiper-slide h-auto swiper-thumb-item mb-3">
-                                            <img class="w-100" src="{{ asset('assets/img/' . $img) }}" alt="product_image">
+                                            <img class="w-100" src="{{ asset('storage/img/' . $img->name) }}" alt="product_image">
                                         </div>
                                     @endforeach
                                 </div>
@@ -80,11 +77,11 @@
                         <div class="col-sm-10 order-1 order-sm-2">
                             <div class="swiper product-slider">
                                 <div class="swiper-wrapper">
-                                    @foreach ($images as $img)
+                                    @foreach ($product->images as $img)
                                         <div class="swiper-slide h-auto" style="background: #0000"><a
-                                                class="glightbox product-view" href="{{ asset('assets/img/' . $img) }}"
+                                                class="glightbox product-view" href="{{ asset('assets/img/' . $img->name) }}"
                                                 data-gallery="gallery2" data-glightbox="Product item 1"><img
-                                                    class="img-fluid" src="{{ asset('assets/img/' . $img) }}"
+                                                    class="img-fluid" src="{{ asset('assets/img/' . $img->name) }}"
                                                     alt="..."></a>
                                         </div>
                                     @endforeach

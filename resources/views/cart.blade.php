@@ -7,17 +7,11 @@
     <div class="modal fade" id="productView" tabindex="-1">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content overflow-hidden border-0">
-                <button class="btn-close p-4 position-absolute top-0 end-0 z-index-20 shadow-0" type="button"
-                    data-bs-dismiss="modal" aria-label="Close"></button>
+                <button class="btn-close p-4 position-absolute top-0 end-0 z-index-20 shadow-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-body p-0">
                     <div class="row align-items-stretch">
-                        <div class="col-lg-6 p-lg-0"><a class="glightbox product-view d-block h-100 bg-cover bg-center"
-                                style="background: url({{ asset('assets/img/product-5.jpg') }})" href="{{ asset('assets/img/product-5.jpg') }}" data-gallery="gallery1"
-                                data-glightbox="Red digital smartwatch"></a><a class="glightbox d-none"
-                                href="{{ asset('assets/img/product-5-alt-1.jpg') }}" data-gallery="gallery1"
-                                data-glightbox="Red digital smartwatch"></a><a class="glightbox d-none"
-                                href="{{ asset('assets/img/product-5-alt-2.jpg') }}" data-gallery="gallery1"
-                                data-glightbox="Red digital smartwatch"></a></div>
+                        <div class="col-lg-6 p-lg-0"><a class="glightbox product-view d-block h-100 bg-cover bg-center" style="background: url({{ asset('assets/img/product-5.jpg') }})" href="{{ asset('assets/img/product-5.jpg') }}" data-gallery="gallery1" data-glightbox="Red digital smartwatch"></a><a class="glightbox d-none" href="{{ asset('assets/img/product-5-alt-1.jpg') }}" data-gallery="gallery1" data-glightbox="Red digital smartwatch"></a><a class="glightbox d-none"
+                               href="{{ asset('assets/img/product-5-alt-2.jpg') }}" data-gallery="gallery1" data-glightbox="Red digital smartwatch"></a></div>
                         <div class="col-lg-6">
                             <div class="p-4 my-md-4">
                                 <ul class="list-inline mb-2">
@@ -38,17 +32,13 @@
                                             <span class="small text-uppercase text-gray mr-4 no-select">Quantity</span>
                                             <div class="quantity">
                                                 <button class="dec-btn p-0"><i class="fas fa-caret-left"></i></button>
-                                                <input class="form-control border-0 shadow-0 p-0" type="text"
-                                                    value="1">
+                                                <input class="form-control border-0 shadow-0 p-0" type="text" value="1">
                                                 <button class="inc-btn p-0"><i class="fas fa-caret-right"></i></button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-5"><a
-                                            class="btn btn-dark btn-sm w-100 h-100 d-flex align-items-center justify-content-center px-0"
-                                            href="cart">Add to cart</a></div>
-                                </div><a class="btn btn-link text-dark text-decoration-none p-0" href="add"><i
-                                        class="far fa-heart me-2"></i>Add to wish list</a>
+                                    <div class="col-sm-5"><a class="btn btn-dark btn-sm w-100 h-100 d-flex align-items-center justify-content-center px-0" href="cart">Add to cart</a></div>
+                                </div><a class="btn btn-link text-dark text-decoration-none p-0" href="add"><i class="far fa-heart me-2"></i>Add to wish list</a>
                             </div>
                         </div>
                     </div>
@@ -84,40 +74,35 @@
                         <table class="table text-nowrap">
                             <thead class="bg-light">
                                 <tr>
-                                    <th class="border-0 p-3" scope="col"> <strong
-                                            class="text-sm text-uppercase">Product</strong></th>
-                                    <th class="border-0 p-3" scope="col"> <strong
-                                            class="text-sm text-uppercase">Price</strong></th>
-                                    <th class="border-0 p-3" scope="col"> <strong
-                                            class="text-sm text-uppercase">Quantity</strong></th>
-                                    <th class="border-0 p-3" scope="col"> <strong
-                                            class="text-sm text-uppercase">Total</strong></th>
-                                    <th class="border-0 p-3" scope="col"> <strong
-                                            class="text-sm text-uppercase"></strong></th>
+                                    <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">Product</strong></th>
+                                    <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">Price</strong></th>
+                                    <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">Quantity</strong></th>
+                                    <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">Total</strong></th>
+                                    <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase"></strong></th>
                                 </tr>
                             </thead>
                             <tbody class="border-0">
                                 <tr>
                                     <th class="ps-0 py-3 border-light" scope="row">
-                                        <div class="d-flex align-items-center"><a
-                                                class="reset-anchor d-block animsition-link" href="detail"><img
-                                                    src="{{ asset('assets/img/product-detail-3.jpg') }}" alt="..."
-                                                    width="70" /></a>
-                                            <div class="ms-3"><strong class="h6"><a
-                                                        class="reset-anchor animsition-link" href="detail">Red
-                                                        digital smartwatch</a></strong></div>
+                                        <div class="d-flex align-items-center">
+                                            <a class="reset-anchor d-block animsition-link" href="detail">
+                                                <img src="{{ asset('assets/img/product-detail-3.jpg') }}" alt="..." width="70" />
+                                            </a>
+                                            <div class="ms-3">
+                                                <strong class="h6">
+                                                    <a class="reset-anchor animsition-link" href="detail">Red digital smartwatch</a>
+                                                </strong>
+                                            </div>
                                         </div>
                                     </th>
                                     <td class="p-3 align-middle border-light">
                                         <p class="mb-0 small">$250</p>
                                     </td>
                                     <td class="p-3 align-middle border-light">
-                                        <div class="border d-flex align-items-center justify-content-between px-3"><span
-                                                class="small text-uppercase text-gray headings-font-family">Quantity</span>
+                                        <div class="border d-flex align-items-center justify-content-between px-3"><span class="small text-uppercase text-gray headings-font-family">Quantity</span>
                                             <div class="quantity">
                                                 <button class="dec-btn p-0"><i class="fas fa-caret-left"></i></button>
-                                                <input class="form-control form-control-sm border-0 shadow-0 p-0"
-                                                    type="text" value="1" />
+                                                <input class="form-control form-control-sm border-0 shadow-0 p-0" type="text" value="1" />
                                                 <button class="inc-btn p-0"><i class="fas fa-caret-right"></i></button>
                                             </div>
                                         </div>
@@ -125,30 +110,25 @@
                                     <td class="p-3 align-middle border-light">
                                         <p class="mb-0 small">$250</p>
                                     </td>
-                                    <td class="p-3 align-middle border-light"><a class="reset-anchor" href=""><i
-                                                class="fas fa-trash-alt small text-muted"></i></a></td>
+                                    <td class="p-3 align-middle border-light"><a class="reset-anchor" href=""><i class="fas fa-trash-alt small text-muted"></i></a></td>
                                 </tr>
                                 <tr>
                                     <th class="ps-0 py-3 border-0" scope="row">
-                                        <div class="d-flex align-items-center"><a
-                                                class="reset-anchor d-block animsition-link" href="detail"><img
-                                                    src="{{ asset('assets/img/product-detail-2.jpg') }}" alt="..."
-                                                    width="70" /></a>
-                                            <div class="ms-3"><strong class="h6"><a
-                                                        class="reset-anchor animsition-link" href="detail">Apple
-                                                        watch</a></strong></div>
+                                        <div class="d-flex align-items-center">
+                                            <a class="reset-anchor d-block animsition-link" href="detail">
+                                                <img src="{{ asset('assets/img/product-detail-2.jpg') }}" alt="..." width="70" />
+                                            </a>
+                                            <div class="ms-3"><strong class="h6"><a class="reset-anchor animsition-link" href="detail">Apple watch</a></strong></div>
                                         </div>
                                     </th>
                                     <td class="p-3 align-middle border-0">
                                         <p class="mb-0 small">$250</p>
                                     </td>
                                     <td class="p-3 align-middle border-0">
-                                        <div class="border d-flex align-items-center justify-content-between px-3"><span
-                                                class="small text-uppercase text-gray headings-font-family">Quantity</span>
+                                        <div class="border d-flex align-items-center justify-content-between px-3"><span class="small text-uppercase text-gray headings-font-family">Quantity</span>
                                             <div class="quantity">
                                                 <button class="dec-btn p-0"><i class="fas fa-caret-left"></i></button>
-                                                <input class="form-control form-control-sm border-0 shadow-0 p-0"
-                                                    type="text" value="1" />
+                                                <input class="form-control form-control-sm border-0 shadow-0 p-0" type="text" value="1" />
                                                 <button class="inc-btn p-0"><i class="fas fa-caret-right"></i></button>
                                             </div>
                                         </div>
@@ -156,8 +136,7 @@
                                     <td class="p-3 align-middle border-0">
                                         <p class="mb-0 small">$250</p>
                                     </td>
-                                    <td class="p-3 align-middle border-0"><a class="reset-anchor" href=""><i
-                                                class="fas fa-trash-alt small text-muted"></i></a></td>
+                                    <td class="p-3 align-middle border-0"><a class="reset-anchor" href=""><i class="fas fa-trash-alt small text-muted"></i></a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -165,12 +144,9 @@
                     <!-- CART NAV-->
                     <div class="bg-light px-4 py-3">
                         <div class="row align-items-center text-center">
-                            <div class="col-md-6 mb-3 mb-md-0 text-md-start"><a class="btn btn-link p-0 text-dark btn-sm"
-                                    href="shop"><i class="fas fa-long-arrow-alt-left me-2"> </i>Continue shopping</a>
+                            <div class="col-md-6 mb-3 mb-md-0 text-md-start"><a class="btn btn-link p-0 text-dark btn-sm" href="shop"><i class="fas fa-long-arrow-alt-left me-2"> </i>Continue shopping</a>
                             </div>
-                            <div class="col-md-6 text-md-end"><a class="btn btn-outline-dark btn-sm"
-                                    href="checkout">Procceed to checkout<i
-                                        class="fas fa-long-arrow-alt-right ms-2"></i></a></div>
+                            <div class="col-md-6 text-md-end"><a class="btn btn-outline-dark btn-sm" href="checkout">Procceed to checkout<i class="fas fa-long-arrow-alt-right ms-2"></i></a></div>
                         </div>
                     </div>
                 </div>
@@ -180,18 +156,14 @@
                         <div class="card-body">
                             <h5 class="text-uppercase mb-4">Cart total</h5>
                             <ul class="list-unstyled mb-0">
-                                <li class="d-flex align-items-center justify-content-between"><strong
-                                        class="text-uppercase small font-weight-bold">Subtotal</strong><span
-                                        class="text-muted small">$250</span></li>
+                                <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small font-weight-bold">Subtotal</strong><span class="text-muted small">$250</span></li>
                                 <li class="border-bottom my-2"></li>
-                                <li class="d-flex align-items-center justify-content-between mb-4"><strong
-                                        class="text-uppercase small font-weight-bold">Total</strong><span>$250</span></li>
+                                <li class="d-flex align-items-center justify-content-between mb-4"><strong class="text-uppercase small font-weight-bold">Total</strong><span>$250</span></li>
                                 <li>
                                     <form action="#">
                                         <div class="input-group mb-0">
                                             <input class="form-control" type="text" placeholder="Enter your coupon">
-                                            <button class="btn btn-dark btn-sm w-100" type="submit"> <i
-                                                    class="fas fa-gift me-2"></i>Apply coupon</button>
+                                            <button class="btn btn-dark btn-sm w-100" type="submit"> <i class="fas fa-gift me-2"></i>Apply coupon</button>
                                         </div>
                                     </form>
                                 </li>
