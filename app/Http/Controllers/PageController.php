@@ -25,8 +25,6 @@ class PageController extends Controller
 
     public function shop (Request $request) {
 
-        dd(route('login'));
-
         if ($request->has('sort_category')) {
 
             // get category id

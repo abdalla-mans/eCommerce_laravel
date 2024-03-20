@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
 use App\Models\Product;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminDashboard;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,15 +21,10 @@ Route::get('/', function () {
     return view('index', compact('products'));
 })->name('page.main');
 
-
-// !!!!!!!!!!!
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/dashboard_admin', function () {
-    return view('dashboard.index');
-})->middleware(['auth', 'admin', 'verified'])->name('dashboard');
+Route::prefix('/dashboard_admin')->controller(AdminDashboard::class)->middleware(['auth', 'admin', 'verified'])->as('dash.')->group(function () {
+    Route::get('/', 'main')->name('main');
+    Route::get('/products', 'products')->name('products');
+});
 
 Route::middleware('auth', 'admin')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -38,3 +34,5 @@ Route::middleware('auth', 'admin')->group(function () {
 
 require __DIR__ . '/old_web.php';
 require __DIR__ . '/auth.php';
+
+

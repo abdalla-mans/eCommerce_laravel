@@ -53,7 +53,7 @@
                 <div class="row px-4 px-lg-5">
                     <div class="col-lg-6">
                         <p class="text-muted small text-uppercase mb-2">New Inspiration 2020</p>
-                        <h1 class="h2 text-uppercase mb-3">20% off on new season</h1><a class="btn btn-dark" href="shop.html">Browse collections</a>
+                        <h1 class="h2 text-uppercase mb-3">20% off on new season</h1><a class="btn btn-dark" href="{{ route('page.shop') }}">Browse collections</a>
                     </div>
                 </div>
             </div>
@@ -65,11 +65,11 @@
                 <h2 class="h5 text-uppercase mb-4">Browse our categories</h2>
             </header>
             <div class="row">
-                <div class="col-md-4"><a class="category-item" href="shop.html"><img class="img-fluid" src="{{ asset('assets/img/cat-img-1.jpg') }}" alt="" /><strong class="category-item-title">Clothes</strong></a>
+                <div class="col-md-4"><a class="category-item" href="{{ route('page.shop') }}"><img class="img-fluid" src="{{ asset('assets/img/cat-img-1.jpg') }}" alt="" /><strong class="category-item-title">Clothes</strong></a>
                 </div>
-                <div class="col-md-4"><a class="category-item mb-4" href="shop.html"><img class="img-fluid" src="{{ asset('assets/img/cat-img-2.jpg') }}" alt="" /><strong class="category-item-title">Shoes</strong></a><a class="category-item" href="shop.html"><img class="img-fluid" src="{{ asset('assets/img/cat-img-3.jpg') }}" alt="" /><strong class="category-item-title">Watches</strong></a>
+                <div class="col-md-4"><a class="category-item mb-4" href="{{ route('page.shop') }}"><img class="img-fluid" src="{{ asset('assets/img/cat-img-2.jpg') }}" alt="" /><strong class="category-item-title">Shoes</strong></a><a class="category-item" href="{{ route('page.shop') }}"><img class="img-fluid" src="{{ asset('assets/img/cat-img-3.jpg') }}" alt="" /><strong class="category-item-title">Watches</strong></a>
                 </div>
-                <div class="col-md-4"><a class="category-item" href="shop.html"><img class="img-fluid" src="{{ asset('assets/img/cat-img-4.jpg') }}" alt="" /><strong class="category-item-title">Electronics</strong></a>
+                <div class="col-md-4"><a class="category-item" href="{{ route('page.shop') }}"><img class="img-fluid" src="{{ asset('assets/img/cat-img-4.jpg') }}" alt="" /><strong class="category-item-title">Electronics</strong></a>
                 </div>
             </div>
         </section>
@@ -90,7 +90,7 @@
                             <div class="position-relative mb-3">
                                 <div class="badge text-white bg-"></div>
                                 <a class="d-block" href="{{ route('page.detail', ['id' => $product->id]) }}">
-                                    <img class="img-fluid w-100" src="{{ asset('storage/img/' . ($product->images[0]->name ?? '')) }}" alt="...">
+                                    <img class="img-fluid w-100" src="{{ asset('storage/img/' . ($product->images[0]->name ?? 'default.jpg')) }}" alt="...">
                                 </a>
                                 <div class="product-overlay">
                                     <ul class="mb-0 list-inline">
@@ -101,7 +101,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <h6> <a class="reset-anchor" href="detail.html">{{ $product->title }}</a></h6>
+                            <h6> <a class="reset-anchor" href="{{ route('page.detail', ['id' => $product->id]) }}">{{ $product->title }}</a></h6>
                             <p class="small text-muted">${{ $product->salary }}</p>
                         </div>
                     </div>

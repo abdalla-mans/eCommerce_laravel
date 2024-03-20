@@ -52,15 +52,38 @@
                             </li>
                         </ul>
                         <ul class="navbar-nav ms-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('page.cart') }}">
-                                    <i class="fas fa-dolly-flatbed me-1 text-gray"> </i>Cart
-                                    <small class="text-gray fw-normal">(2)</small>
-                                </a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href=""> <i class="far fa-heart me-1"></i><small class="text-gray fw-normal">
-                                        (0)</small></a></li>
 
+                            @guest
+                                <li class="nav-link"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+                                <li class="nav-link"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
+                            @else
+                                <div class="btn-group">
+                                    <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Shopping
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('page.cart') }}">
+                                                <i class="fas fa-dolly-flatbed me-1 text-gray"> </i>Cart
+                                                <small class="text-gray fw-normal">(2)</small>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="">
+                                                <i class="far fa-heart me-1"></i>
+                                                <small class="text-gray fw-normal">(0)</small>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <form action="{{ route('logout') }}" method="post">
+                                                @csrf
+                                                {{-- <input type="button" value="Logout"> --}}
+                                                <button class="btn btn-light btn-sm">Logout</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endguest
 
                             {{-- <li class="nav-item">
                                 <a class="nav-link" href="{{ route('page.logout') }}">
