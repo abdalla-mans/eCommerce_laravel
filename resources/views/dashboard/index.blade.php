@@ -1,5 +1,8 @@
 @extends('dashboard.layouts.app')
 
+@section('title', $auth_user->name . ' dashboard')
+
+@section('dash_active', 'active')
 
 @section('content')
     <!-- Page Heading -->

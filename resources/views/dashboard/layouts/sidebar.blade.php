@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>@yield('title', 'my Dashboard')</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('dashboard/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -33,20 +33,20 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">{{ $auth_user->roles->first()->name }}</div>
             </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item @yield('dash_active')">
                 <a class="nav-link" href="{{ route('dash.main') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
 
-            <!-- Divider -->
+            {{-- <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
@@ -63,8 +63,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="#">Buttons</a>{{-- buttons.html --}}
-                        <a class="collapse-item" href="#">Cards</a>{{-- cards.html --}}
+                        <a class="collapse-item" href="#">Buttons</a>
+                        <a class="collapse-item" href="#">Cards</a>
                     </div>
                 </div>
             </li>
@@ -78,13 +78,13 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="#">Colors</a>{{-- utilities-color.html --}}
-                        <a class="collapse-item" href="#">Borders</a>{{-- utilities-border.html --}}
-                        <a class="collapse-item" href="#">Animations</a>{{-- utilities-animation.html --}}
-                        <a class="collapse-item" href="#">Other</a>{{-- utilities-other.html --}}
+                        <a class="collapse-item" href="#">Colors</a>
+                        <a class="collapse-item" href="#">Borders</a>
+                        <a class="collapse-item" href="#">Animations</a>
+                        <a class="collapse-item" href="#">Other</a>
                     </div>
                 </div>
-            </li>
+            </li> --}}
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -95,10 +95,17 @@
             </div>
 
             <!-- Nav Item - Products -->
-            <li class="nav-item">
+            <li class="nav-item @yield('products_active')">
                 <a class="nav-link" href="{{ route('dash.products') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Products</span></a>
+            </li>
+
+            <!-- Nav Item - Products -->
+            <li class="nav-item @yield('users_active')">
+                <a class="nav-link" href="{{ route('dash.users') }}">
+                    <i class="fas fa-user"></i>
+                    <span>Users</span></a>
             </li>
 
         </ul>
@@ -236,7 +243,7 @@
                                         <div class="small text-gray-500">Jae Chun · 1d</div>
                                     </div>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center" href="{{ asset('dashboard/#') }}">
+                                <a class="dropdown-item d-flex align-items-center" href="{{ route('dash.main') }}">
                                     <div class="dropdown-list-image mr-3">
                                         <img class="rounded-circle" src="{{ asset('dashboard/img/undraw_profile_3.svg') }}" alt="...">
                                         <div class="status-indicator bg-warning"></div>
@@ -247,7 +254,7 @@
                                         <div class="small text-gray-500">Morgan Alvarez · 2d</div>
                                     </div>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center" href="{{ asset('dashboard/#') }}">
+                                <a class="dropdown-item d-flex align-items-center" href="{{ route('dash.main') }}">
                                     <div class="dropdown-list-image mr-3">
                                         <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="...">
                                         <div class="status-indicator bg-success"></div>
@@ -267,12 +274,12 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="{{ asset('dashboard/#') }}" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="{{ asset('dashboard/img/undraw_profile.svg') }}">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $auth_user->name }}</span>
+                                <img class="img-profile rounded-circle" src="{{ asset('dashboard/img/users/' . ($auth_user->image->name ?? '../undraw_profile.svg')) }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="{{ asset('dashboard/#') }}">
+                                <a class="dropdown-item" href="{{ route('profile.update') }}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -285,10 +292,15 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ asset('dashboard/#') }}" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
+                                <form class="dropdown-item" action="{{ route('logout') }}" method="post">
+                                    @csrf
+                                    <button class="btn btn-sm">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Logout
+                                    </button>
+                                </form>
+                                {{-- <a href="{{ asset('dashboard/#') }}" data-toggle="modal" data-target="#logoutModal">
+                                </a> --}}
                             </div>
                         </li>
 

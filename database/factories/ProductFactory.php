@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\DB;
 
@@ -22,6 +23,7 @@ class ProductFactory extends Factory
             'title' => $this->faker->text(20),
             'description' => $this->faker->realText(),
             'salary' => fake()->numberBetween(800, 50000),
+            'owner_id' => 2,
             'category_id' => DB::table('categories')->inRandomOrder()->first()->id,
         ];
     }

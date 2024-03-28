@@ -25,16 +25,18 @@ class DatabaseSeeder extends Seeder
         // $this->call(ProductSeeder::class);
         // $this->call(UserSeeder::class);
         // \App\Models\Category::factory(50)->create();
-        $arr = ['phones', 'laptops', 'watches', 'shoes', 'electronics', 'clothes'];
-        foreach ($arr as $cat) {
-            Category::create(['name' => $cat]);
+        $categories = ['phones', 'laptops', 'watches', 'shoes', 'electronics', 'clothes'];
+        foreach ($categories as $category) {
+            Category::create(['name' => $category]);
         }
-
+        
+        $this->call(LaratrustSeeder::class);
+        
         \App\Models\User::create([
             'name' => 'abdalla mansour',
             'email' => 'eng.abdalla.mansour@gmail.com',
             'phone' => '01019113472',
-            'type' => 'super_admin',
+            // 'type' => 'super_admin',
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ]);
@@ -43,7 +45,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'abdalla mansour',
             'email' => 'a.mansour.code@gmail.com',
             'phone' => '123412345634',
-            'type' => 'admin',
+            // 'type' => 'admin',
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ]);
@@ -52,7 +54,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'abdalla mansour',
             'email' => 'bodemansour8@gmail.com',
             'phone' => '23412341234',
-            'type' => 'user',
+            // 'type' => 'user',
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ]);
@@ -60,5 +62,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\Product::factory(200)->create();
         \App\Models\User::factory(100)->create();
         \App\Models\Image::factory(500)->create();
+
     }
 }

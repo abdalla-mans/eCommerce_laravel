@@ -11,7 +11,8 @@ class PageController extends Controller
 
     public function detail(string $id, Request $r)
     {
-        $product = Product::where('id', $id)->first();
+        $product = Product::with(['images'])->where('id', $id)->first();
+        // $product = Product::where('id', $id)->first();
 
         if ($product != null) {
 
@@ -31,6 +32,7 @@ class PageController extends Controller
             $category_id = $request->sort_category;
             
             $products = Product::where('category_id', $category_id)->paginate();
+            // $products = Product::with(['images'])->where('category_id', $category_id)->paginate();
 
             // chick category if exist
             if ($products->count() > 0) {

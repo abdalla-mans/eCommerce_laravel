@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title', 100);
             $table->string('description');
             $table->integer('salary');
+            $table->foreignId('owner_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
