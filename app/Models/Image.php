@@ -11,7 +11,7 @@ class Image extends Model
 
     public $timestamps = false;
 
-    // protected $fillable = ['imageable_type', 'imageable_id', 'name'];
+    protected $fillable = ['imageable_type', 'imageable_id', 'name'];
 
     public function imageable()
     {
