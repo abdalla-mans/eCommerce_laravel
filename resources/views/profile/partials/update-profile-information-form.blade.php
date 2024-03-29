@@ -13,7 +13,7 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
 
@@ -34,6 +34,8 @@
             <x-text-input id="image" name="image" type="file" class="mt-1 block w-full" :value="old('image', $user->image)" autocomplete="image" />
             <x-input-error class="mt-2" :messages="$errors->get('image')" />
         </div>
+
+        <img id="img" src="{{ asset('storage/img/users/' . $user->image->name) ?? '' }}" width="150" alt="">
 
         <div>
             <x-input-label for="email" :value="__('Email')" />
@@ -73,4 +75,19 @@
             @endif
         </div>
     </form>
+
+    <script>
+        let img = document.getElementById('img');
+        let input = document.getElementById('image');
+
+        input.onchange = function ($path) {
+            const file = this.files[0];
+            const reader = new FileReader;
+            reader.onload = function (e) {
+                img.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    </script>
+
 </section>
