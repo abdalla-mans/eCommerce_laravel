@@ -35,6 +35,7 @@ Route::prefix('/dashboard_admin')->middleware(['auth', 'admin', 'verified'])->as
     Route::controller(UserController::class)->group(function () {
         Route::get('/users', 'index')->name('users');
         Route::get('/users/create', 'create')->name('users.create');
+        Route::post('/users/create', 'store')->name('users.create');
     });
 });
 

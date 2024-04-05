@@ -16,6 +16,5 @@ class Image extends Model
     public function imageable()
     {
         return $this->morphTo('imageable', 'imageable_type', 'imageable_id');
-        // return $this->morphToMany(Product::class, 'image');
     }
 }

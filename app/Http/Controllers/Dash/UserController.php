@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Dash;
 
 use App\Models\User;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Validation\Rules;
 
 class UserController extends Controller
 {
@@ -25,7 +27,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        Alert::html('Html Title', 'Html Code', 'Type');
+        $auth_user = Auth::user();
+        if ($auth_user->hasRole('super_admin')) {
+            return view('dashboard.users.create_user', compact('auth_user'));
+        }
+        return redirect()->back();
     }
 
     /**
@@ -33,7 +39,44 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $auth_user = Auth::user();
+
+        if (! $auth_user->hasRole('super_admin')) {
+            return redirect()->back();
+        }
+        $request->validate([
+            'name' => 'required|string|min:3|max:20',
+            // i have make more detaile
+            'phone' => 'required|string|min:9|max:50|unique:users|regex:/^\d{11}$/',
+            'email' => 'required|string|email|max:50|lowercase|unique:users',
+            'password' => ['required', 'min:8', 'confirmed', Rules\Password::defaults()],
+            'image' => 'nullable|image|max:2048',
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'password' => $request->password
+        ]);
+
+        if ($request->file()) {
+            $image = $request->file()['image'];
+            $image = $image->store('img/users');
+
+            Image::create([
+                'imageable_id' => $user->id,
+                'imageable_type' => User::class,
+                'name' => $image,
+            ]);
+        }
+
+        $user->addRole('user');
+
+        Alert::success('Success', 'User added successfully');
+        $auth_user = Auth::user();
+        return view('dashboard.users.create_user', compact('auth_user'));
+
     }
 
     /**
