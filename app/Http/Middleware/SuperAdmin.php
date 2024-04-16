@@ -5,9 +5,10 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 use Symfony\Component\HttpFoundation\Response;
 
-class Admin
+class SuperAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,12 +17,12 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-
-        $user_role = Auth::user();
-        
-        if ($user_role->hasRole('admin') xor $user_role->hasRole('super_admin')) {
+        $super_admin = Auth::user();
+        if ($super_admin->hasRole('super_admin')) {
             return $next($request);
         }
-        return redirect('/');
+        
+        Alert::error('Failed', 'You can\'t create new user');
+        return redirect()->back();
     }
 }

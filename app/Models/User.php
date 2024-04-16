@@ -48,12 +48,13 @@ class User extends Authenticatable implements MustVerifyEmail, LaratrustUser
         'password' => 'hashed',
     ];
 
-    public function products () {
+    public function products()
+    {
         return $this->hasMany(Product::class, 'owner_id', 'id');
     }
 
-    public function image () {
+    public function image()
+    {
         return $this->morphOne(Image::class, 'imageable');
     }
-
 }

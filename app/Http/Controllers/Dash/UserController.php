@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Dash;
 
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Image;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
-use Illuminate\Validation\Rules;
 
 class UserController extends Controller
 {
@@ -18,7 +21,7 @@ class UserController extends Controller
     public function index()
     {
         $auth_user = Auth::user();
-        $users = User::all();
+        $users = User::with(['image'])->get();
         return view('dashboard.users', compact('auth_user', 'users'));
     }
 
@@ -27,11 +30,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        $auth_user = Auth::user();
-        if ($auth_user->hasRole('super_admin')) {
-            return view('dashboard.users.create_user', compact('auth_user'));
-        }
-        return redirect()->back();
+        return view('dashboard.users.create_user', [
+            'auth_user' => Auth::user(),
+            'roles' => Role::all()
+        ]);
     }
 
     /**
@@ -39,18 +41,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $auth_user = Auth::user();
-
-        if (! $auth_user->hasRole('super_admin')) {
-            return redirect()->back();
-        }
         $request->validate([
             'name' => 'required|string|min:3|max:20',
-            // i have make more detaile
-            'phone' => 'required|string|min:9|max:50|unique:users|regex:/^\d{11}$/',
-            'email' => 'required|string|email|max:50|lowercase|unique:users',
+            'phone' => 'required|string|unique:users|regex:/^\d{11}$/',
+            'email' => 'required|email|unique:users',
             'password' => ['required', 'min:8', 'confirmed', Rules\Password::defaults()],
             'image' => 'nullable|image|max:2048',
+            'role' => 'required|exists:roles,id',
         ]);
 
         $user = User::create([
@@ -60,8 +57,7 @@ class UserController extends Controller
             'password' => $request->password
         ]);
 
-        if ($request->file()) {
-            $image = $request->file()['image'];
+        if ($image = $request->file('image')) {
             $image = $image->store('img/users');
 
             Image::create([
@@ -69,30 +65,37 @@ class UserController extends Controller
                 'imageable_type' => User::class,
                 'name' => $image,
             ]);
+        } else {
+            Image::create([
+                'imageable_id' => $user->id,
+                'imageable_type' => User::class,
+                'name' => 'default.png',
+            ]);
         }
 
-        $user->addRole('user');
+        $user->syncRoles([$request->role]);
 
         Alert::success('Success', 'User added successfully');
-        $auth_user = Auth::user();
-        return view('dashboard.users.create_user', compact('auth_user'));
 
+        $users = User::with(['image'])->get();
+        return to_route('dash.users.index', [
+            'auth_user' => Auth::user(),
+            'users' => $users,
+            'roles' => Role::all()
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $user)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(User $user)
     {
-        //
+        return view('dashboard.users.edit_user', [
+            'user' => $user->load('image'),
+            'roles' =>  Role::all(),
+            'auth_user' => Auth::user(),
+        ]);
     }
 
     /**
@@ -101,6 +104,56 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         //
+        $request->validate([
+            'name' => 'required|string|min:3|max:20',
+            'phone' => 'required|string|unique:users,phone,' . $user->id . '|regex:/^\d{11}$/',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'password' => ['nullable', 'min:8', 'confirmed', Rules\Password::defaults()],
+            'image' => 'nullable|image|max:2048',
+            'role' => 'required|exists:roles,id',
+        ]);
+
+        $updateUser = $request->except(['role', 'image', 'password']);
+
+        $user->update($updateUser);
+
+        if ($request->password) {
+            $user->update(['password' => Hash::make($request->password)]);
+        }
+
+        if ($image = $request->file('image')) {
+
+            $old_img = $user->image;
+
+            if ($old_img) {
+
+                unlink(public_path('storage/' . $old_img->name));
+
+                $image = $image->store('img/users');
+                $old_img->update([
+                    'name' => $image,
+                ]);
+            } else {
+
+                $image = $image->store('img/users');
+                Image::create([
+                    'imageable_id' => $user->id,
+                    'imageable_type' => User::class,
+                    'name' => $image,
+                ]);
+            }
+        }
+
+        $user->syncRoles([$request->role]);
+
+        Alert::success('Success', 'User added successfully');
+
+        $users = User::with(['image'])->get();
+        return to_route('dash.users.index', [
+            'auth_user' => Auth::user(),
+            'users' => $users,
+            'roles' => Role::all()
+        ]);
     }
 
     /**
@@ -108,6 +161,20 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+
+        $old_img = $user->image;
+        if ($old_img) {
+            unlink(public_path('storage/' . $old_img->name));
+        }
+        $user->delete();
+
+        Alert::success('Success', 'User deleted successfully');
+
+        $users = User::with(['image'])->get();
+        return to_route('dash.users.index', [
+            'auth_user' => Auth::user(),
+            'users' => $users,
+            'roles' => Role::all()
+        ]);
     }
 }

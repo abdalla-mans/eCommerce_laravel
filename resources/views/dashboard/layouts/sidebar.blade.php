@@ -104,7 +104,7 @@
 
             <!-- Nav Item - Products -->
             <li class="nav-item @yield('users_active')">
-                <a class="nav-link" href="{{ route('dash.users') }}">
+                <a class="nav-link" href="{{ route('dash.users.index') }}">
                     <i class="fas fa-user"></i>
                     <span>Users</span></a>
             </li>

@@ -32,11 +32,10 @@ Route::prefix('/dashboard_admin')->middleware(['auth', 'admin', 'verified'])->as
     Route::controller(ProductController::class)->group(function () {
         Route::get('/products', 'index')->name('products');
     });
-    Route::controller(UserController::class)->group(function () {
-        Route::get('/users', 'index')->name('users');
-        Route::get('/users/create', 'create')->name('users.create');
-        Route::post('/users/create', 'store')->name('users.create');
-    });
+
+    Route::resource('users', UserController::class)->middleware('super_admin');
+    // now admin can only read users
+    Route::get('users', [UserController::class, 'index'])->name('users.index');
 });
 
 Route::middleware('auth', 'admin')->group(function () {
